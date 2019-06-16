@@ -11,7 +11,7 @@ app.post('/upload', upload.single('image'), async (req, res, next) => {
   if (!file) {
     const error = new Error('Envie o arquivo a ser tratado');
     error.httpStatusCode = 400;
-    return next(error)
+    return res.json(error);
   }
   await extractText(file.path).then(text => {
     const result = { data: text, ...file };
